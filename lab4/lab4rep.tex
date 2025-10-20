@@ -1,0 +1,431 @@
+\documentclass[a4paper, 14pt]{extarticle}
+
+% Поля
+%--------------------------------------
+\usepackage{geometry}
+\geometry{a4paper,tmargin=2cm,bmargin=2cm,lmargin=3cm,rmargin=1cm}
+%--------------------------------------
+
+
+%Russian-specific packages
+%--------------------------------------
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc} 
+\usepackage[english, main=russian]{babel}
+%--------------------------------------
+
+\usepackage{textcomp}
+
+% Красная строка
+%--------------------------------------
+\usepackage{indentfirst}               
+%--------------------------------------             
+
+
+%Graphics
+%--------------------------------------
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{wrapfig}
+%--------------------------------------
+
+% Полуторный интервал
+%--------------------------------------
+\linespread{1.3}                    
+%--------------------------------------
+
+%Выравнивание и переносы
+%--------------------------------------
+% Избавляемся от переполнений
+\sloppy
+% Запрещаем разрыв страницы после первой строки абзаца
+\clubpenalty=10000
+% Запрещаем разрыв страницы после последней строки абзаца
+\widowpenalty=10000
+%--------------------------------------
+
+%Списки
+\usepackage{enumitem}
+
+%Подписи
+\usepackage{caption} 
+
+%Гиперссылки
+\usepackage{hyperref}
+
+\hypersetup {
+	unicode=true
+}
+
+%Рисунки
+%--------------------------------------
+\DeclareCaptionLabelSeparator*{emdash}{~--- }
+\captionsetup[figure]{labelsep=emdash,font=onehalfspacing,position=bottom}
+%--------------------------------------
+
+\usepackage{tempora}
+
+%Листинги
+%--------------------------------------
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\footnotesize, 
+  %basicstyle=\footnotesize\AnkaCoder,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks shoulbd only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=t,                    % sets the caption-position to bottom
+  inputencoding=utf8,
+  frame=single,                    % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\bf,       % keyword style
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  xleftmargin=25pt,
+  xrightmargin=25pt,
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  tabsize=2,                       % sets default tabsize to 8 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+%--------------------------------------
+
+%%% Математические пакеты %%%
+%--------------------------------------
+\usepackage{amsthm,amsfonts,amsmath,amssymb,amscd}  % Математические дополнения от AMS
+\usepackage{mathtools}                              % Добавляет окружение multlined
+\usepackage[perpage]{footmisc}
+%--------------------------------------
+
+%--------------------------------------
+%			НАЧАЛО ДОКУМЕНТА
+%--------------------------------------
+
+\begin{document}
+
+%--------------------------------------
+%			ТИТУЛЬНЫЙ ЛИСТ
+%--------------------------------------
+\begin{titlepage}
+\thispagestyle{empty}
+\newpage
+
+
+%Шапка титульного листа
+%--------------------------------------
+\vspace*{-60pt}
+\hspace{-65pt}
+\begin{minipage}{0.3\textwidth}
+\hspace*{-20pt}\centering
+\includegraphics[width=\textwidth]{emblem}
+\end{minipage}
+\begin{minipage}{0.67\textwidth}\small \textbf{
+\vspace*{-0.7ex}
+\hspace*{-6pt}\centerline{Министерство науки и высшего образования Российской Федерации}
+\vspace*{-0.7ex}
+\centerline{Федеральное государственное бюджетное образовательное учреждение }
+\vspace*{-0.7ex}
+\centerline{высшего образования}
+\vspace*{-0.7ex}
+\centerline{<<Московский государственный технический университет}
+\vspace*{-0.7ex}
+\centerline{имени Н.Э. Баумана}
+\vspace*{-0.7ex}
+\centerline{(национальный исследовательский университет)>>}
+\vspace*{-0.7ex}
+\centerline{(МГТУ им. Н.Э. Баумана)}}
+\end{minipage}
+%--------------------------------------
+
+%Полосы
+%--------------------------------------
+\vspace{-25pt}
+\hspace{-35pt}\rule{\textwidth}{2.3pt}
+
+\vspace*{-20.3pt}
+\hspace{-35pt}\rule{\textwidth}{0.4pt}
+%--------------------------------------
+
+\vspace{1.5ex}
+\hspace{-35pt} \noindent \small ФАКУЛЬТЕТ\hspace{80pt} <<Информатика и системы управления>>
+
+\vspace*{-16pt}
+\hspace{47pt}\rule{0.83\textwidth}{0.4pt}
+
+\vspace{0.5ex}
+\hspace{-35pt} \noindent \small КАФЕДРА\hspace{50pt} <<Теоретическая информатика и компьютерные технологии>>
+
+\vspace*{-16pt}
+\hspace{30pt}\rule{0.866\textwidth}{0.4pt}
+
+\vspace{11em}
+
+\begin{center}
+\Large {\bf Отчет о лабораторной работе №4} \\ 
+\large {\bf по курсу <<Операционные системы>>} \\
+\large «Операции с виртуальной памятью»
+\end{center}\normalsize
+
+\vspace{8em}
+
+
+\begin{flushright}
+  {Студент: Трофименко Д. И. \hspace*{15pt}\\ 
+  \vspace{2ex}
+  Группа: ИУ9 - 42Б \hspace*{15pt}\\
+  \vspace{2ex}
+  Преподаватель: Брагин А. В.}
+\end{flushright}
+
+\bigskip
+
+\vfill
+ 
+
+\begin{center}
+\textsl{Москва, 2025}
+\end{center}
+\end{titlepage}
+%--------------------------------------
+%		КОНЕЦ ТИТУЛЬНОГО ЛИСТА
+%--------------------------------------
+
+\renewcommand{\ttdefault}{pcr}
+
+\setlength{\tabcolsep}{3pt}
+\newpage
+\setcounter{page}{2} 
+\begin{center}
+\section*{Содержание}\label{Sect::task}
+\end{center}
+\begin{flushleft}
+\begin{tabular}{l@{\hspace{4cm}}r}
+1) Постановка задачи & \hspace{4cm} \framebox[1cm]{3} \\
+2) Практическая реализация & \hspace{4cm} \framebox[1cm]{4} \\
+3) Результаты & \hspace{4cm} \framebox[1cm]{7} \\
+4) Выводы & \hspace{4cm} \framebox[1cm]{11} \\
+5) Список литературы & \hspace{4cm} \framebox[1cm]{12} \\
+\end{tabular}
+\end{flushleft}
+
+\newpage
+\begin{center}
+\section{Постановка задачи}
+а) ReactOS
+\end{center}
+Используя созданный в лабораторной работе № 2 минимальный драйвер, совместимый с ОС Windows NT/ReactOS и NetBSD, реализовать следующие действия с виртуальной памятью.\\
+1. Зарезервировать  10  страниц виртуальной памяти,  используя  функцию ZwAllocateVirtualMemory(NtCurrentProcess(), MEM\_RESERVE, …)..\\
+2. Обеспечить пять первых страниц из выделенных 10 физическими  страницами  памяти,  используя  ZwAllocateVirtualMemory (NtCurrentProcess(), MEM\_COMMIT, …).\\
+3. Вывести физические адреса и значения PTE для всех 10 страниц в шестнадцатеричном формате.\\
+4. Освободить выделенную память.
+
+\begin{center}
+б) NetBSD
+\end{center}
+Используя созданный в лабораторной работе № 2 драйвер, реализовать следующие действия с виртуальной памятью.\\
+1. Зарезервировать 10 страниц виртуальной памяти, используя функцию ядра uvm\_km\_alloc.\\
+2. Обеспечить пять первых страниц из выделенных 10 физическими страницами памяти, используя функции ядра uvm\_pglistalloc и pmap\_kenter\_pa.\\
+3. Вывести физические адреса и значения PTE для всех 10 страниц в шестнадцатеричном формате.\\
+4.  Освободить  выделенную  память, используя функции  ядра pmap\_kremove, pmap\_update, uvm\_pglistfree, uvm\_km\_free.\\
+Драйвер должен выгружаться динамически с помощью команды modunload
+
+
+\vspace{0.1em}
+
+
+\newpage
+\vspace{2em}
+\begin{center}
+\section{Практическая реализация}\label{Sect::res}
+а) ReactOS
+\end{center}
+1) Изучение общей структуры загружаемого модуля ядра в системе
+ReactOS в официальной документации. Изучение библиотек,
+позволяющим получить доступ к виртуальной памяти\\
+2) Модификация исходных файлов операционной системы, путём
+добавления в папку drivers файла с исходным кодом драйвера, а
+также служебных файлов, необходимых для компиляции\\
+3) Пересборка iso-образа операционной системы и его установка на
+виртуальную машину Oracle VirtualBox.\\
+4) Запуск полученного драйвера с помощью встроенной утилиты sc start.\\
+
+\begin{center}
+б) NetBSD
+\end{center}
+1) Изучение общей структуры загружаемого модуля ядра в системе
+NetBSD в официальной документации. Изучение библиотек,
+позволяющим получить доступ к списку процессов в системе\\
+2) Добавление исходного кода драйвера в папку /usr/src/sys/dev и
+makefile в папку /usr/src/sys/modules/lab3.\\
+3) Сборка драйвера с помощью утилиты make и его установка с
+помощью встроенной утилиты modload.\\
+
+\newpage
+
+Исходный код программы представлен в листингах~\ref{lst:code1}--~\ref{lst:code2}.
+\begin{figure}[!htb]
+\begin{lstlisting}[language={},caption={
+lab4driver.c (ReactOS).},label={lst:code1}]
+...
+DRIVER_UNLOAD DriverUnload;
+VOID NTAPI DriverUnload(IN PDRIVER_OBJECT DriverObject)
+{
+    DPRINT1("------------------DRIVER-UNLOADED--------------------\n");
+    IoDeleteDevice(DriverObject->DeviceObject);
+}
+NTSTATUS NTAPI DriverEntry(IN PDRIVER_OBJECT DriverObject,
+            IN PUNICODE_STRING RegistryPath)
+{
+    DPRINT1("---------------Trofimenko Dmitriy---------------\n");
+    DriverObject->DriverUnload = DriverUnload;
+    MmPageEntireDriver(DriverEntry);
+    ...
+    ZwAllocateVirtualMemory(NtCurrentProcess(), &Pages, 0, &sizeReserve, MEM_RESERVE, PAGE_READWRITE);
+    DPRINT1("10 PAGES RESERVED\n");
+    ZwAllocateVirtualMemory(NtCurrentProcess(), &Pages, 0 , &sizeCommit, MEM_COMMIT, PAGE_READWRITE);
+    DPRINT1("5 PAGES COMMITED\n");
+    for(i = 0; i < 5; i++) {
+        *((PCHAR)Pages + 0x1000 * i) = i + 1;
+    }
+    for(i = 0; i < 10; i++) {
+        pte = ((ULONG)Pages >> 12) + PTE_BASE + i;
+        DPRINT1("Page: %d\n\
+            Physical address: %X\n\
+            Valid:            %d\n\
+            Accessed:         %d\n\
+            Dirty:            %d\n\
+            \n", i + 1, 
+            pte->Valid ? (pte->PageFrameNumber << 12) : 0,
+            pte->Valid,
+            pte->Accessed,
+            pte->Dirty);
+    }
+    ZwFreeVirtualMemory(NtCurrentProcess(), &Pages, &sizeCommit, MEM_DECOMMIT);
+    DPRINT1("MEMORY IS DECOMMITED\n");
+    ZwFreeVirtualMemory(NtCurrentProcess(), &Pages, 0, MEM_RELEASE);
+    DPRINT1("MEMORY IS RELEASED\n");
+    return STATUS_SUCCESS;
+}
+
+\end{lstlisting}
+\end{figure}
+
+\begin{figure}[!htb]
+\begin{lstlisting}[language={},caption={
+lab4.c (NetBSD).},label={lst:code2}]
+...
+MODULE(MODULE_CLASS_MISC, lab4, NULL);
+#define NUM_PAGES 10
+static struct vm_page *pglist = NULL;
+static void print_page_info(vaddr_t va, int page_num) {
+    ...
+    printf("Page - %d\n", page_num);
+    printf("Valid - %s\n", valid ? "true" : "false");
+    printf("Used - %s\n", used ? "true" : "false");
+    printf("Modified - %s\n", modified ? "true" : "false");
+    printf("Physical address - 0x%08lx\n\n", (unsigned long)pa);
+}
+static int lab4_modcmd(modcmd_t cmd, void *arg) {
+    ...
+    if (cmd == MODULE_CMD_INIT) {
+        addr = uvm_km_alloc(kernel_map, size, PAGE_SIZE, UVM_KMF_VAONLY);
+        ...
+        int r = uvm_pglistalloc(5 * PAGE_SIZE, 0, 0xffffffff, 0, 0, &mlist, 5, 0);
+        if (r != 0) {
+            uvm_km_free(kernel_map, addr, size, 0);
+            printf("lab4: physical memory allocation failed\n");
+            return ENOMEM;
+        }
+        pglist = TAILQ_FIRST(&mlist); 
+        struct vm_page *pg = TAILQ_FIRST(&mlist);
+        for (int i = 0; i < 5 && pg != NULL; i++) {
+            paddr_t pa = VM_PAGE_TO_PHYS(pg);
+            pmap_kenter_pa(addr + i * PAGE_SIZE, pa, VM_PROT_READ | VM_PROT_WRITE, 0);
+            pg = TAILQ_NEXT(pg, pageq.queue);
+        }
+        pmap_update(pmap_kernel());
+        printf("Before free:\n");
+        ...
+        pmap_kremove(addr, size);
+        pmap_update(pmap_kernel());
+        if (pglist)
+            uvm_pglistfree(&mlist);
+        uvm_km_free(kernel_map, addr, size, 0);
+        return 0;
+    }
+    if (cmd == MODULE_CMD_FINI) {
+        printf("lab4: module unloaded\n");
+        return 0;
+    }
+    return ENOTTY;
+}
+
+
+\end{lstlisting}
+\end{figure}
+
+
+\newpage
+
+\vspace{1em}
+\begin{center}
+\section{Результаты}
+
+\begin{minipage}{\linewidth}
+\vspace{50pt}
+\centering
+\includegraphics[width=1.0\linewidth]{result_reactos (1).jpg}
+\captionof{figure}{result\_reactos (1)}
+\label{fig:result_reactos (1).jpg}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\vspace{20pt}
+\centering
+\includegraphics[width=1.0\linewidth]{result_reactos (2).jpg}
+\captionof{figure}{result\_reactos (2)}
+\label{fig:result_reactos (2).jpg}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\vspace{50pt}
+\centering
+\includegraphics[width=1.0\linewidth]{result_netbsd (1).jpg}
+\captionof{figure}{result\_netbsd (1)}
+\label{fig:result_netbsd (1).jpg}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\vspace{50pt}
+\centering
+\includegraphics[width=1.0\linewidth]{result_netbsd (2).jpg}
+\captionof{figure}{result\_netbsd (2)}
+\label{fig:result_netbsd (2).jpg}
+\end{minipage}
+
+\end{center}
+
+\newpage
+
+\begin{center}
+\section{Выводы}
+а) ReactOS
+\end{center} 
+В ходе выполнения работы были изучены механизмы управления виртуальной памятью в режиме ядра Windows NT/ReactOS, включая резервирование и выделение физических страниц с помощью функций ZwAllocateVirtualMemory. Основной сложностью стало корректное определение и вывод физических адресов и значений PTE (Page Table Entry), так как это требует глубокого понимания архитектуры виртуальной памяти и работы MMU (Memory Management Unit). Однако сам процесс резервирования и коммита памяти оказался достаточно простым благодаря четкой документации API ядра. Также было замечено, что ReactOS, несмотря на свою неполную совместимость с Windows NT, корректно обрабатывает базовые операции с памятью, что подтверждает работоспособность её подсистемы управления памятью. Освобождение ресурсов прошло без осложнений, что подтвердило важность правильного завершения работы драйвера во избежание утечек памяти.
+
+\begin{center}
+б) NetBSD
+\end{center}
+В ходе работы были изучены механизмы управления виртуальной памятью в режиме ядра NetBSD, включая резервирование памяти через uvm\_km\_alloc и выделение физических страниц с помощью uvm\_pglistalloc и pmap\_kenter\_pa. Основной сложностью стало корректное взаимодействие с подсистемой UVM (Virtual Memory Manager) и pmap (physical mapping), так как NetBSD использует иной подход к управлению памятью по сравнению с Windows NT. Однако процесс освобождения памяти через pmap\_kremove, pmap\_update, uvm\_pglistfree и uvm\_km\_free оказался логичным и предсказуемым. Динамическая загрузка и выгрузка модуля с помощью modload/modunload прошла успешно, что подтвердило стабильность работы драйвера. В целом, работа с памятью в NetBSD потребовала более глубокого понимания архитектуры ядра, но предоставила больший контроль над управлением страницами.
+
+
+
+\begin{center}
+\section{Список литературы}
+\end{center}
+1) Учебно-методическое пособие "Операционные системы" [Электронный ресурс]. URL:\\
+https://press.bmstu.ru/catalog/item/8226/reader/\\
+
+
+\end{document}
