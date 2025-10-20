@@ -1,0 +1,388 @@
+\documentclass[a4paper, 14pt]{extarticle}
+
+% Поля
+%--------------------------------------
+\usepackage{geometry}
+\geometry{a4paper,tmargin=2cm,bmargin=2cm,lmargin=3cm,rmargin=1cm}
+%--------------------------------------
+
+
+%Russian-specific packages
+%--------------------------------------
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc} 
+\usepackage[english, main=russian]{babel}
+%--------------------------------------
+
+\usepackage{textcomp}
+
+% Красная строка
+%--------------------------------------
+\usepackage{indentfirst}               
+%--------------------------------------             
+
+
+%Graphics
+%--------------------------------------
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{wrapfig}
+%--------------------------------------
+
+% Полуторный интервал
+%--------------------------------------
+\linespread{1.3}                    
+%--------------------------------------
+
+%Выравнивание и переносы
+%--------------------------------------
+% Избавляемся от переполнений
+\sloppy
+% Запрещаем разрыв страницы после первой строки абзаца
+\clubpenalty=10000
+% Запрещаем разрыв страницы после последней строки абзаца
+\widowpenalty=10000
+%--------------------------------------
+
+%Списки
+\usepackage{enumitem}
+
+%Подписи
+\usepackage{caption} 
+
+%Гиперссылки
+\usepackage{hyperref}
+
+\hypersetup {
+	unicode=true
+}
+
+%Рисунки
+%--------------------------------------
+\DeclareCaptionLabelSeparator*{emdash}{~--- }
+\captionsetup[figure]{labelsep=emdash,font=onehalfspacing,position=bottom}
+%--------------------------------------
+
+\usepackage{tempora}
+
+%Листинги
+%--------------------------------------
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\footnotesize, 
+  %basicstyle=\footnotesize\AnkaCoder,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks shoulbd only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=t,                    % sets the caption-position to bottom
+  inputencoding=utf8,
+  frame=single,                    % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\bf,       % keyword style
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  xleftmargin=25pt,
+  xrightmargin=25pt,
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  tabsize=2,                       % sets default tabsize to 8 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+%--------------------------------------
+
+%%% Математические пакеты %%%
+%--------------------------------------
+\usepackage{amsthm,amsfonts,amsmath,amssymb,amscd}  % Математические дополнения от AMS
+\usepackage{mathtools}                              % Добавляет окружение multlined
+\usepackage[perpage]{footmisc}
+%--------------------------------------
+
+%--------------------------------------
+%			НАЧАЛО ДОКУМЕНТА
+%--------------------------------------
+
+\begin{document}
+
+%--------------------------------------
+%			ТИТУЛЬНЫЙ ЛИСТ
+%--------------------------------------
+\begin{titlepage}
+\thispagestyle{empty}
+\newpage
+
+
+%Шапка титульного листа
+%--------------------------------------
+\vspace*{-60pt}
+\hspace{-65pt}
+\begin{minipage}{0.3\textwidth}
+\hspace*{-20pt}\centering
+\includegraphics[width=\textwidth]{emblem}
+\end{minipage}
+\begin{minipage}{0.67\textwidth}\small \textbf{
+\vspace*{-0.7ex}
+\hspace*{-6pt}\centerline{Министерство науки и высшего образования Российской Федерации}
+\vspace*{-0.7ex}
+\centerline{Федеральное государственное бюджетное образовательное учреждение }
+\vspace*{-0.7ex}
+\centerline{высшего образования}
+\vspace*{-0.7ex}
+\centerline{<<Московский государственный технический университет}
+\vspace*{-0.7ex}
+\centerline{имени Н.Э. Баумана}
+\vspace*{-0.7ex}
+\centerline{(национальный исследовательский университет)>>}
+\vspace*{-0.7ex}
+\centerline{(МГТУ им. Н.Э. Баумана)}}
+\end{minipage}
+%--------------------------------------
+
+%Полосы
+%--------------------------------------
+\vspace{-25pt}
+\hspace{-35pt}\rule{\textwidth}{2.3pt}
+
+\vspace*{-20.3pt}
+\hspace{-35pt}\rule{\textwidth}{0.4pt}
+%--------------------------------------
+
+\vspace{1.5ex}
+\hspace{-35pt} \noindent \small ФАКУЛЬТЕТ\hspace{80pt} <<Информатика и системы управления>>
+
+\vspace*{-16pt}
+\hspace{47pt}\rule{0.83\textwidth}{0.4pt}
+
+\vspace{0.5ex}
+\hspace{-35pt} \noindent \small КАФЕДРА\hspace{50pt} <<Теоретическая информатика и компьютерные технологии>>
+
+\vspace*{-16pt}
+\hspace{30pt}\rule{0.866\textwidth}{0.4pt}
+
+\vspace{11em}
+
+\begin{center}
+\Large {\bf Отчет о лабораторной работе №3} \\ 
+\large {\bf по курсу <<Операционные системы>>} \\
+\large «Список процессов в системе»
+\end{center}\normalsize
+
+\vspace{8em}
+
+
+\begin{flushright}
+  {Студент: Трофименко Д. И. \hspace*{15pt}\\ 
+  \vspace{2ex}
+  Группа: ИУ9 - 42Б \hspace*{15pt}\\
+  \vspace{2ex}
+  Преподаватель: Брагин А. В.}
+\end{flushright}
+
+\bigskip
+
+\vfill
+ 
+
+\begin{center}
+\textsl{Москва, 2025}
+\end{center}
+\end{titlepage}
+%--------------------------------------
+%		КОНЕЦ ТИТУЛЬНОГО ЛИСТА
+%--------------------------------------
+
+\renewcommand{\ttdefault}{pcr}
+
+\setlength{\tabcolsep}{3pt}
+\newpage
+\setcounter{page}{2} 
+\begin{center}
+\section*{Содержание}\label{Sect::task}
+\end{center}
+\begin{flushleft}
+\begin{tabular}{l@{\hspace{4cm}}r}
+1) Постановка задачи & \hspace{4cm} \framebox[1cm]{3} \\
+2) Практическая реализация & \hspace{4cm} \framebox[1cm]{4} \\
+3) Результаты & \hspace{4cm} \framebox[1cm]{6} \\
+4) Выводы & \hspace{4cm} \framebox[1cm]{8} \\
+5) Список литературы & \hspace{4cm} \framebox[1cm]{8} \\
+\end{tabular}
+\end{flushleft}
+\newpage
+
+\begin{center}
+\section{Постановка задачи}
+а) ReactOS
+\end{center}
+На основе драйвера из лабораторной работы № 2 создать новый драйвер, который выводит в отладочный лог список процессов  в  системе, используя API  ядра.  Список  должен  состоять  из имени процесса (имя образа — Image Name), идентификатора процесса (PID) и идентификатора родительского процесса.\\  Драйвер  должен загружаться  и  выгружаться по требованию так, чтобы можно было проверить  соответствие списков процессов, выведенных драйвером, и с помощью утилиты Task Manager (taskmgr.exe).\\
+Информацию о процессах получить из ядра с использованием функции  ZwQuerySystemInformation(SystemProcessInformation, …). Выделение и освобождение памяти для информации о процессах реализовать,  используя  функции  ExAllocatePool(PagedPool, …) и ExFreePool(). Предусмотреть ситуацию, в  которой запрошенный размер буфера, необходимый для размещения информации о про-цессах,  может  измениться  в большую  сторону  между  вызовами  функции ZwQuerySystemInformation, и в этом случае произвести новое выделение памяти с освобождением старого буфера.
+
+\begin{center}
+б) NetBSD
+\end{center}
+На основе драйвера из лабораторной работы № 2 создать новый драйвер, который выводит в отладочный лог список процессов  в  системе, используя API  ядра.  Список должен  состоять  из имени процесса (имя образа — Image Name), идентификатора процесса (PID) и идентификатора родительского процесса.\\
+Драйвер должен загружаться и выгружаться по требованию так, чтобы  можно  было  проверить соответствие  списков  процессов, выведенных драйвером, и с помощью утилиты ps.\\
+Информацию  о  процессах получить  из  ядра,  используя  глобальную переменную allproc. Для этого необходимо включить за-головочные файлы:\\
+\#include <sys/module.h>\\
+\#include <sys/kernel.h>\\
+\#include <sys/proc.h>\\
+Самостоятельно следует изучить проблему защиты от «грязно-го чтения» списка процессов в момент его изменения операционной системой (например, при создании нового процесса или удалении завершенного).
+
+
+\vspace{0.1em}
+
+
+\vspace{2em}
+\begin{center}
+\section{Практическая реализация}\label{Sect::res}
+а) ReactOS
+\end{center}
+1) Изучение общей структуры загружаемого модуля ядра в системе
+ReactOS в официальной документации. Изучение библиотек,
+позволяющим получить доступ к виртуальной памяти\\
+2) Модификация исходных файлов операционной системы, путём
+добавления в папку drivers файла с исходным кодом драйвера, а
+также служебных файлов, необходимых для компиляции\\
+3) Пересборка iso-образа операционной системы и его установка на
+виртуальную машину Oracle VirtualBox.\\
+4) Запуск полученного драйвера с помощью встроенной утилиты sc start.\\
+
+\begin{center}
+б) NetBSD
+\end{center}
+1) Изучение общей структуры загружаемого модуля ядра в системе
+NetBSD в официальной документации. Изучение библиотек,
+позволяющим получить доступ к списку процессов в системе\\
+2) Добавление исходного кода драйвера в папку /usr/src/sys/dev и
+makefile в папку /usr/src/sys/modules/lab3.\\
+3) Сборка драйвера с помощью утилиты make и его установка с
+помощью встроенной утилиты modload.\\
+
+\newpage
+
+Исходный код программы представлен в листингах~\ref{lst:code1}--~\ref{lst:code2}.
+\begin{figure}[!htb]
+\begin{lstlisting}[language={},caption={
+lab3driver.c (ReactOS).},label={lst:code1}]
+...
+DriverEntry(IN PDRIVER_OBJECT DriverObject, IN PUNICODE_STRING RegistryPath) {
+    ...
+    DPRINT1("---------------Trofimenko Dmitriy---------------\n");
+    ...
+    PVOID process;
+    while (0 == 0) {
+        process = ExAllocatePoolWithTag(PagedPool, buffsz, 'Proc');
+        if (!process) {
+            return STATUS_MEMORY_NOT_ALLOCATED;
+        }
+        ULONG buffSize = 0;
+        status = ZwQuerySystemInformation(SystemProcessInformation, process, buffsz, &buffSize);
+        if (buffSize != buffsz) {
+            ExFreePool(process);
+            buffsz = buffSize;
+            continue;
+        }
+        if (NT_ERROR(status)) {
+            ExFreePool(process);
+            return status;
+        }
+        break;
+    }
+    PSYSTEM_PROCESS_INFORMATION curtpr = (PSYSTEM_PROCESS_INFORMATION)process;
+    while (curtpr) {
+        RtlInitUnicodeString(&imagename, curtpr->ImageName.Buffer);
+        DPRINT1("Name: %wZ, PID: %d, Parent PID: %d\n", 
+                    &imagename, 
+                    (ULONG)curtpr->UniqueProcessId,
+                    (ULONG)curtpr->InheritedFromUniqueProcessId);
+
+        if (!curtpr->NextEntryOffset) {
+            break;
+        }
+        curtpr = (PSYSTEM_PROCESS_INFORMATION)((PUCHAR)curtpr + curtpr->NextEntryOffset);
+    }
+    ... 
+}
+
+
+\end{lstlisting}
+\end{figure}
+
+\begin{figure}[!htb]
+\begin{lstlisting}[language={},caption={
+lab3.c (NetBSD).},label={lst:code2}]
+...
+MODULE(MODULE_CLASS_MISC, lab3, NULL);
+static int lab3_modcmd(modcmd_t cmd, void *arg) {
+    printf("---------------Trofimenko Dmitriy---------------\n");
+    struct proc *p;
+    switch (cmd) {
+        case MODULE_CMD_INIT:
+            PROCLIST_FOREACH(p, &allproc) {
+                printf("%d %s ", p->p_pid, p->p_comm);
+                if (p->p_pptr != NULL) {
+                    printf("%d\n", p->p_pptr->p_pid);
+                } else {
+                    printf("\n");
+                }
+            }
+            break;
+        case MODULE_CMD_FINI:
+            break;
+        default:
+            return ENOTTY;
+        }
+    return 0;
+}
+
+
+\end{lstlisting}
+\end{figure}
+
+
+
+
+\newpage
+\vspace{1em}
+\begin{center}
+\section{Результаты}
+
+\begin{minipage}{\linewidth}
+\vspace{50pt}
+\centering
+\includegraphics[width=1.0\linewidth]{result_reactos.jpg}
+\captionof{figure}{result\_reactos}
+\label{fig:result_reactos.jpg}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\vspace{50pt}
+\centering
+\includegraphics[width=1.0\linewidth]{result_netbsd.jpg}
+\captionof{figure}{result\_netbsd}
+\label{fig:result_netbsd.jpg}
+\end{minipage}
+
+\end{center}
+
+\newpage
+
+\begin{center}
+\section{Выводы}
+а) ReactOS
+\end{center}
+В ходе выполнения лабораторной работы были изучены методы взаимодействия с API ядра ReactOS для получения информации о процессах, включая использование функции ZwQuerySystemInformation с параметром SystemProcessInformation, а также управление памятью через ExAllocatePool и ExFreePool. Основной сложностью стало корректное определение размера буфера для данных о процессах, так как их количество может динамически изменяться, что потребовало повторного выделения памяти. Однако работа с отладочным выводом в ReactOS оказалась удобной, что позволило быстро проверить соответствие списка процессов данным из Task Manager. Также было подтверждено, что загрузка и выгрузка драйвера через sc работают стабильно, что упрощает тестирование функциональности.
+
+\begin{center}
+б) NetBSD
+\end{center}
+В ходе выполнения лабораторной работы в NetBSD были изучены методы работы с глобальным списком процессов allproc и особенности безопасного доступа к нему с учетом возможных изменений в многозадачной среде. Основной сложностью стала реализация защиты от «грязного чтения» списка процессов, так как он может изменяться во время итерации, что потребовало использования механизмов синхронизации, таких как блокировка proc\_lock. Однако работа с макросом PROCLIST\_FOREACH значительно упростила обход списка процессов, а загрузка модуля через modload оказалась удобной и быстрой. Сравнение вывода драйвера с утилитой ps подтвердило корректность полученных данных, что позволило убедиться в правильности реализации.
+
+\begin{center}
+\section{Список литературы}
+\end{center}
+1) Учебно-методическое пособие "Операционные системы" [Электронный ресурс]. URL:\\
+https://press.bmstu.ru/catalog/item/8226/reader/\\
+
+
+\end{document}
