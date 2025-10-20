@@ -1,0 +1,386 @@
+\documentclass[a4paper, 14pt]{extarticle}
+
+% Поля
+%--------------------------------------
+\usepackage{geometry}
+\geometry{a4paper,tmargin=2cm,bmargin=2cm,lmargin=3cm,rmargin=1cm}
+%--------------------------------------
+
+
+%Russian-specific packages
+%--------------------------------------
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc} 
+\usepackage[english, main=russian]{babel}
+%--------------------------------------
+
+\usepackage{textcomp}
+
+% Красная строка
+%--------------------------------------
+\usepackage{indentfirst}               
+%--------------------------------------             
+
+
+%Graphics
+%--------------------------------------
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{wrapfig}
+%--------------------------------------
+
+% Полуторный интервал
+%--------------------------------------
+\linespread{1.3}                    
+%--------------------------------------
+
+%Выравнивание и переносы
+%--------------------------------------
+% Избавляемся от переполнений
+\sloppy
+% Запрещаем разрыв страницы после первой строки абзаца
+\clubpenalty=10000
+% Запрещаем разрыв страницы после последней строки абзаца
+\widowpenalty=10000
+%--------------------------------------
+
+%Списки
+\usepackage{enumitem}
+
+%Подписи
+\usepackage{caption} 
+
+%Гиперссылки
+\usepackage{hyperref}
+
+\hypersetup {
+	unicode=true
+}
+
+%Рисунки
+%--------------------------------------
+\DeclareCaptionLabelSeparator*{emdash}{~--- }
+\captionsetup[figure]{labelsep=emdash,font=onehalfspacing,position=bottom}
+%--------------------------------------
+
+\usepackage{tempora}
+
+%Листинги
+%--------------------------------------
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\footnotesize, 
+  %basicstyle=\footnotesize\AnkaCoder,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks shoulbd only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=t,                    % sets the caption-position to bottom
+  inputencoding=utf8,
+  frame=single,                    % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\bf,       % keyword style
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  xleftmargin=25pt,
+  xrightmargin=25pt,
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  tabsize=2,                       % sets default tabsize to 8 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+%--------------------------------------
+
+%%% Математические пакеты %%%
+%--------------------------------------
+\usepackage{amsthm,amsfonts,amsmath,amssymb,amscd}  % Математические дополнения от AMS
+\usepackage{mathtools}                              % Добавляет окружение multlined
+\usepackage[perpage]{footmisc}
+%--------------------------------------
+
+%--------------------------------------
+%			НАЧАЛО ДОКУМЕНТА
+%--------------------------------------
+
+\begin{document}
+
+%--------------------------------------
+%			ТИТУЛЬНЫЙ ЛИСТ
+%--------------------------------------
+\begin{titlepage}
+\thispagestyle{empty}
+\newpage
+
+
+%Шапка титульного листа
+%--------------------------------------
+\vspace*{-60pt}
+\hspace{-65pt}
+\begin{minipage}{0.3\textwidth}
+\hspace*{-20pt}\centering
+\includegraphics[width=\textwidth]{emblem}
+\end{minipage}
+\begin{minipage}{0.67\textwidth}\small \textbf{
+\vspace*{-0.7ex}
+\hspace*{-6pt}\centerline{Министерство науки и высшего образования Российской Федерации}
+\vspace*{-0.7ex}
+\centerline{Федеральное государственное бюджетное образовательное учреждение }
+\vspace*{-0.7ex}
+\centerline{высшего образования}
+\vspace*{-0.7ex}
+\centerline{<<Московский государственный технический университет}
+\vspace*{-0.7ex}
+\centerline{имени Н.Э. Баумана}
+\vspace*{-0.7ex}
+\centerline{(национальный исследовательский университет)>>}
+\vspace*{-0.7ex}
+\centerline{(МГТУ им. Н.Э. Баумана)}}
+\end{minipage}
+%--------------------------------------
+
+%Полосы
+%--------------------------------------
+\vspace{-25pt}
+\hspace{-35pt}\rule{\textwidth}{2.3pt}
+
+\vspace*{-20.3pt}
+\hspace{-35pt}\rule{\textwidth}{0.4pt}
+%--------------------------------------
+
+\vspace{1.5ex}
+\hspace{-35pt} \noindent \small ФАКУЛЬТЕТ\hspace{80pt} <<Информатика и системы управления>>
+
+\vspace*{-16pt}
+\hspace{47pt}\rule{0.83\textwidth}{0.4pt}
+
+\vspace{0.5ex}
+\hspace{-35pt} \noindent \small КАФЕДРА\hspace{50pt} <<Теоретическая информатика и компьютерные технологии>>
+
+\vspace*{-16pt}
+\hspace{30pt}\rule{0.866\textwidth}{0.4pt}
+
+\vspace{11em}
+
+\begin{center}
+\Large {\bf Отчет о лабораторной работе №1} \\ 
+\large {\bf по курсу <<Операционные системы>>} \\
+\large «ReactOS и NetBSD. Среда сборки, установка и тестирование в виртуальной машине»
+\end{center}\normalsize
+
+\vspace{8em}
+
+
+\begin{flushright}
+  {Студент: Трофименко Д. И. \hspace*{15pt}\\ 
+  \vspace{2ex}
+  Группа: ИУ9 - 42Б \hspace*{15pt}\\
+  \vspace{2ex}
+  Преподаватель: Брагин А. В.}
+\end{flushright}
+
+\bigskip
+
+\vfill
+ 
+
+\begin{center}
+\textsl{Москва, 2025}
+\end{center}
+\end{titlepage}
+%--------------------------------------
+%		КОНЕЦ ТИТУЛЬНОГО ЛИСТА
+%--------------------------------------
+
+\renewcommand{\ttdefault}{pcr}
+
+\setlength{\tabcolsep}{3pt}
+\newpage
+\setcounter{page}{2} 
+\begin{center}
+\section*{Содержание}\label{Sect::task}
+\end{center}
+
+\begin{flushleft}
+\begin{tabular}{l@{\hspace{4cm}}r}
+1) Постановка задачи & \hspace{4cm} \framebox[1cm]{3} \\
+2) Практическая реализация & \hspace{4cm} \framebox[1cm]{4} \\
+3) Результаты & \hspace{4cm} \framebox[1cm]{6} \\
+4) Выводы & \hspace{4cm} \framebox[1cm]{8} \\
+5) Список литературы & \hspace{4cm} \framebox[1cm]{8} \\
+\end{tabular}
+\end{flushleft}
+
+\newpage
+\begin{center}
+\section{Постановка задачи}
+а) ReactOS
+\end{center}
+Настроить среду сборки и тестирования ReactOS на своем компьютере (или на компьютере в учебной аудитории Университета), собрать установочный образ и произвести его установку в виртуальную машину с помощью программных средств виртуализации
+
+\begin{center}
+б) NetBSD
+\end{center}
+Установить новый выпуск NetBSD из дистрибутива с официального сайта  проекта  NetBSD  https://www.netbsd.org/ в  виртуальную машину. Настроить среду сборки и тестирования NetBSD в вирту-альной машине на своем компьютере (или на компьютере в учебной аудитории Университета). Пересобрать ядро в этой виртуальной машине, добавив вывод фамилии обучающегося в debug log.\\
+Не следует предпринимат попытки кросс-компилировать ядро NetBSD в Windows, Linux или OS X. Собирать его нужно внутри самой NetBSD, которая установлена в виртуальной машине.
+
+\vspace{0.1em}
+
+
+\newpage
+\vspace{2em}
+\begin{center}
+\section{Практическая реализация}\label{Sect::res}
+а) ReactOS
+\end{center}
+1) Установил RosBE. С её помощью произвел сборку установочного
+образа из исходного кода, который клонировал с официального гит
+репозитория reactos (система контроля версий git уже предварительно
+у меня на компьютере стояла), используя инструкции из [5].\\
+2) Скачала VirtualBox с официального сайта. Проблем с установкой не
+возникло.\\
+3) Следуя инструкциям из [2], cоздал виртуальную машину для reactos,
+настроил вывод com-порта в файл reactos\_debug.log на основной системе.\\
+4) Произвел установку собранного в пункте 2 образа на виртуальную
+машину. Загрузил её в режиме вывода bootlog в com-порт.\\
+5) Проанализировал bootlog. В исходниках reactos в файле,
+расположенном по адресу /ntoskrln/kd64/kdinit.c, добавил строчку,
+выводящую мою фамилию при загрузке системы с помощью команды
+DPRINT().\\
+6) Заменил ядро, перезагрузил машину, убедился, что в отладочном логе
+появляется фамилия.\\
+
+\begin{center}
+б) NetBSD
+\end{center}
+1) С официального сайта NetBSD скачал установочный образ NetBSD-10.1
+для архитектуры amd64.\\
+2) В VirtualBox создал машину для NetBSD, настроил сетевое соединение
+и вывод com-порта в файл netbsd\_debug.log.\\
+3) Установил операционную систему из скачанного образа. Во время
+установки произвел автоматическую настройку сети.\\
+4) После установки с помощью ftp, пользуясь [4], скачал исходные файлы
+ядра NetBSD-10.1.\\
+5) Внёс изменения в файл /usr/src/sys/kern/init\_main.c, добавив вывод
+своего ФИО с помощью команды printf\\
+6) Следуя инструкциям [5], cоздал свою конфигурацию системы,
+выполнив команду cp GENERIC izmenenieIshodnikov. Произвел
+компиляцию ядра, заменил старое ядро на новое.\\
+7) Перезагрузил систему, с помощью команды dmesg | grep Trofimenko
+убедился, что мое ФИО выводится в логе.\\
+8) Настроил вывод com-порта в файл netbsd\_debug.log на основной системе.\\
+9) Перезагрузил машину, убедился, что в отладочном логе
+появляется фамилия.\\
+
+
+Исходный код программ представлен в листингах~\ref{lst:code1}--~\ref{lst:code2}.
+\begin{figure}[!htb]
+\begin{lstlisting}[language={},caption={
+kdinit.c (ReactOS).},label={lst:code1}]
+...
+KdpPrintBanner(VOID)
+{
+    SIZE_T MemSizeMBs = KdpGetMemorySizeInMBs(KeLoaderBlock);
+    DPRINT1("-----------------------------------------------------\n");
+    DPRINT1("INit ReactOS.\n");
+    DPRINT1("---------------Trofimenko Dmitriy---------------\n");
+    DPRINT1("ReactOS " KERNEL_VERSION_STR " (Build " KERNEL_VERSION_BUILD_STR ") (Commit " KERNEL_VERSION_COMMIT_HASH ")\n");
+    DPRINT1("%u System Processor [%u MB Memory]\n", KeNumberProcessors, MemSizeMBs);
+    ...
+}
+...
+
+\end{lstlisting}
+\end{figure}
+
+\begin{figure}[!htb]
+\begin{lstlisting}[language={},caption={
+init\_main.c (NetBSD).},label={lst:code2}]
+...
+void 
+main(void)
+{
+printf("Trofimenko Dmitriy\n");
+...
+}
+...
+
+\end{lstlisting}
+\end{figure}
+
+
+\newpage
+
+
+\vspace{1em}
+\begin{center}
+\section{Результаты}
+\begin{minipage}{\linewidth}
+\vspace{50pt}
+\centering
+\includegraphics[width=1.0\linewidth]{reactos.jpg}
+\captionof{figure}{reactos}
+\label{fig:reactos.jpg}
+
+
+\end{minipage}
+\begin{minipage}{\linewidth}
+\vspace{50pt}
+\centering
+\includegraphics[width=1.0\linewidth]{result_reactos.jpg}
+\captionof{figure}{result\_reactos}
+\label{fig:result_reactos.jpg}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\vspace{50pt}
+\centering
+\includegraphics[width=1.0\linewidth]{netbsd.jpg}
+\captionof{figure}{netbsd}
+\label{fig:netbsd.jpg}
+\end{minipage}
+
+
+\begin{minipage}{\linewidth}
+\vspace{50pt}
+\centering
+\includegraphics[width=1.0\linewidth]{result_netbsd.jpg}
+\captionof{figure}{result\_netbsd}
+\label{fig:result_netbsd.jpg}
+\end{minipage}
+
+\end{center}
+
+\newpage
+
+\begin{center}
+\section{Выводы}
+а) ReactOS
+\end{center}
+В ходе работы были приобретены навыки настройки среды сборки ReactOS (RosBE), работы с системой контроля версий Git и процесса компиляции исходного кода в установочный ISO-образ. Основной сложностью стало корректное конфигурирование виртуальной машины для вывода отладочной информации, а также поиск подходящего места в коде ядра (ntoskrnl) для внедрения пользовательской строки с фамилией. Однако сам процесс модификации ядра оказался достаточно простым благодаря подробной документации ReactOS и логичной структуре исходного кода. Важным итогом стало понимание этапов сборки ОС, отладки через виртуальную машину и взаимодействия с низкоуровневыми компонентами системы.
+
+\begin{center}
+б) NetBSD
+\end{center}
+В ходе работы были освоены процессы установки NetBSD в виртуальную машину, настройки среды сборки и перекомпиляции ядра. Основной сложностью стало корректное конфигурирование системы для вывода отладочной информации, а также поиск подходящего места в исходном коде ядра для добавления пользовательской строки. Однако сама сборка и замена ядра прошли успешно благодаря четкой документации NetBSD и логичной структуре системы. Важным итогом стало понимание особенностей работы с BSD-системами, включая управление исходным кодом и отладку на уровне ядра.
+
+
+\begin{center}
+\section{Список литературы}
+\end{center}
+1) Учебно-методическое пособие "Операционные системы" [Электронный ресурс]. URL:\\
+https://press.bmstu.ru/catalog/item/8226/reader/\\
+2) Статья о настройке VirtualBox [Электронный ресурс]. URL:\\
+https://www.nakivo.com/blog/use-virtualbox-quick-overview/\\
+3) Проект NetBSD [Электронный ресурс]. URL:\\
+https://www.netbsd.org\\
+4) Статья “Obtaining the sources” [Электронный ресурс]. URL:\\
+https://netbsd.org/docs/guide/en/chap-fetch.html\#chap-fetch-cvs\\
+5) Статья “Compiling the kernel” [Электронный ресурс]. URL:\\
+https://netbsd.org/docs/guide/en/chap-kernel.html\\
+6) Инструкция по сборке ReactOS [Электронный ресурс]. URL:\\
+https://reactos.org/wiki/Building\_ReactOS\\
+7) Инструкция по отладке ReactOS [Электронный ресурс]. URL:\\
+https://reactos.org/wiki/Debugging\\
+
+
+\end{document}
